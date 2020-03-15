@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+	</title>
+</head>
+<body>
+	<input id = "newItem" type="text" name=""/>
+	<button onclick="addItem()">add</button>
+	<ul id = "todo-List">
+		<!-- <li>take a shower</li>
+		<li>have a walk</li>
+		<li>go to bed</li> -->
+	</ul>
+	<script type="text/javascript">
+		var keyStorage = "todoList";
+		var dataString = localStorage.getItem(keyStorage);
+		var todoList   ;
+		if( dataString ) {
+			todoList = JSON.parse(dataString);//may cai cho JSON deo hieu
+		} else todoList = [];// empty array
+		
+		// "take a shower",
+		// "have a walk",
+		// "go to bed"
+		//o day tao se truyen vao 1 localStorage, kieu cai cu da ghi vao file, chi bang truyen het
+
+		 
+		function addItem( ) {
+			// body...
+			var input = document.getElementById("newItem");
+			var newItem = input.value;//cai nay no khong hien mau xanh nhi
+			todoList.push(newItem);
+			render();
+			//clear input
+			input.value="";
+			//cu them local moi thi update loccalstorage cua minh
+			//localstroage xuat hien dean khi minh xoa cai thanh phan cua no di
+			//tuy nhien theo li thuyet nos ci xuat hien den khi trinh duyet bi tat di ma thoi, nen tac dung cua no la co the quay lai buoc cu, trang nhow la sai cai gi trong trang thi co the kuu tru lai
+
+			//giong nhu ghi file vi luc doc file ra no la string
+			localStorage.setItem(keyStorage,JSON.stringify(todoList));//ghi lai cai toDoList voi key la bien keyStorage, luu vao localstorage
+		}
+		function render() {
+			var htmlList = document.getElementById('todo-List');
+			var input1 = document.getElementById("123");
+			//var dataString =
+			var content = todoList.map(x => {
+			return "<li>" + x + "</li>"
+		});
+		htmlList.innerHTML = content.join('');
+		// input1.value = content.join('');
+		}
+	render();	 
+	</script>
+</body>
+</html>
