@@ -1,0 +1,51 @@
+<<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+	</title>
+</head>
+<body>
+	<input id = "newItem" type="text" name=""/>
+	<p id="123">123rgh</p>
+	<button id = "btnAdd" >add</button>
+	<ul id = "todo-List">
+		<!-- <li>take a shower</li>
+		<li>have a walk</li>
+		<li>go to bed</li> -->
+	</ul>
+	<script type="text/javascript">
+		var todoList = [
+		// "take a shower",
+		// "have a walk",
+		// "go to bed"
+		];
+		var  btnAdd = document.getElementById("btnAdd");
+		//btnAdd.onclick = addItem;
+		btnAdd.addEventListener('click', addItem);
+		btnAdd.addEventListener('click', ( () => {
+			console.log("da click")
+		}));
+
+		function addItem( ) {
+			// body...
+			var input = document.getElementById("newItem");
+			var newItem = input.value;//cai nay no khong hien mau xanh nhi
+			todoList.push(newItem);
+			render();
+			//clear input
+			input.value="";
+		}
+		function render() {
+			var htmlList = document.getElementById('todo-List');
+			var input1 = document.getElementById("123");
+		var content = todoList.map(x => {
+			return "<li>" + x + "</li>"
+		});
+		htmlList.innerHTML = content.join('');
+		// input1.value = content.join('');
+		}
+		 
+	</script>
+</body>
+</html>

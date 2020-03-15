@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+	</title>
+</head>
+<body>
+	<input id = "newItem" type="text" name=""/>
+	<button onclick="addItem()">add</button>
+	<ul id = "todo-List">
+	</ul>
+	<script type="text/javascript">
+		var keyStorage = "todoList";
+		var dataString = localStorage.getItem(keyStorage);
+		var todoList   ;
+		if( dataString ) {
+			todoList = JSON.parse(dataString);//may cai cho JSON deo hieu
+		} else todoList = [];// empty array
+		 var htmlList = document.getElementById('todo-List');
+		 //bind event
+		 htmlList.addEventListener('click', onListClick);
+
+		 function onListClick(event) { //nhan dau vao la event
+		 	//console.log(event);
+		 	var button = event.target;
+		 	var index = parseInt(button.dataset.id);
+		 	console.log(index);
+		 	todoList.splice( index,  1);
+		 	render();
+		 	localStorage.setItem(keyStorage,JSON.stringify(todoList));
+
+
+
+
+
+		 }
+
+
+
+
+		function addItem()  {
+			// body...
+			var input = document.getElementById("newItem");
+			var newItem = input.value;//cai nay no khong hien mau xanh nhi
+			todoList.push(newItem);
+			render();
+			//clear input
+			input.value="";
+			 
+			//giong nhu ghi file vi luc doc file ra no la string
+			localStorage.setItem(keyStorage,JSON.stringify(todoList));
+		}
+		function render() {
+			
+			var input1 = document.getElementById("123");
+			//var dataString =
+			var content = todoList.map((x,i) => {
+			return "<li>" + x + ' <button data-id=" ' +  i  +'">Delete</button></li>';
+		});
+		htmlList.innerHTML = content.join('');
+		// input1.value = content.join('');
+
+		}
+	render();	 
+	</script>
+</body>
+</html>
